@@ -4,8 +4,10 @@ import MoviesList from './components/MoviesList';
 import './App.css';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [movie,setMovies] = useState([])
  async function fetchMovies() {
+  setIsLoading(true);
   const response = await fetch('https://swapi.dev/api/films/')
   
   const data = await response.json()
@@ -21,7 +23,12 @@ function App() {
     })
     console.log(data)
     
-   setMovies(transformedData)}
+   setMovies(transformedData)
+   setTimeout(() => {
+    setIsLoading(false)
+   }, 1000);
+  
+  }
  
 
   return (
@@ -30,7 +37,8 @@ function App() {
         <button onClick={fetchMovies}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={movie} />
+       {!isLoading && <MoviesList movies={movie} />}
+        {isLoading && <div className="spinner"></div>}
       </section>
     </React.Fragment>
   );
