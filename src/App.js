@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
+import AddMovie from "./components/AddMovie";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +60,9 @@ function App() {
 
   return (
     <React.Fragment>
+   <section><AddMovie></AddMovie></section>
       <section>
+      
         <button onClick={fetchMovies}>Fetch Movies</button>
         <button onClick={cancelRetry}>Cancel</button>
       </section>
